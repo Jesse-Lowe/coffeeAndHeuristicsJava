@@ -6,8 +6,6 @@
 
 package coffeeandheuristics;
 
-import javax.swing.Timer;
-
 
 /**
  *
@@ -28,7 +26,44 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
      * Creates new form CoffeeAndHeristicsGUI
      */
     public CoffeeAndHeristicsGUI() {
+        
         initComponents();
+        if(powerOn == false){
+            PowerButton.setText("Power on.");
+        }else{
+            PowerButton.setText("Power off.");
+        }
+        if(boilerOn == false){
+            BoilerElementState.setText("Boiler on.");
+        }else{
+            BoilerElementState.setText("Boiler off.");
+        }
+        if(potFull == false){
+            PotWaterLevel.setText("Fill pot.");
+        }else{
+            PotWaterLevel.setText("Empty pot.");
+        }
+        if(valveClosed == false){
+            SteamValveState.setText("Close valve.");
+        }else{
+            SteamValveState.setText("Open valve.");
+        }
+        if(boilerFull == false){
+            BoilerWaterLevel.setText("Fill boiler.");
+        }else{
+            BoilerWaterLevel.setText("Empty boiler.");
+        }
+        if(heaterPlateOn == false){
+            WarmerPlateElementState.setText("Heater on.");
+        }else{
+            WarmerPlateElementState.setText("Heater off.");
+        }
+        if(potOnHeater == false){
+            PotOnOff.setText("Place pot.");
+        }else{
+            PotOnOff.setText("Remove pot.");
+        }
+        
     }
 
     /**
@@ -292,7 +327,6 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-       Timer boilerTimer = new Timer(500, null);
     
     private void FileMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileMenuItemSaveActionPerformed
         TextOutputFrame.append("Saved States. (will actualy implementt soon.) \n");
@@ -303,11 +337,13 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
         if(heaterPlateOn == false){
             TextOutputFrame.append("Heater On. \n");
             heaterPlateOn = true;
+            WarmerPlateElementState.setText("Heater off.");
             
         }
         else{
             TextOutputFrame.append("Heater Off. \n");
             heaterPlateOn = false;
+            WarmerPlateElementState.setText("Heater on.");
         }
 
     }//GEN-LAST:event_WarmerPlateElementStateActionPerformed
@@ -316,33 +352,39 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
         if(valveClosed == false){
             TextOutputFrame.append("Valve Closed. \n");
             valveClosed = true;
+            SteamValveState.setText("Open valve.");
         }
         else{
             TextOutputFrame.append("Valve Open. \n");
             valveClosed = false;
+            SteamValveState.setText("Close valve.");
         }
         
     }//GEN-LAST:event_SteamValveStateActionPerformed
 
     private void BoilerElementStateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoilerElementStateActionPerformed
         if(boilerOn == false){
-            TextOutputFrame.append("Boiler on \n");
+            TextOutputFrame.append("Boiler on. \n");
             boilerOn = true;
+            BoilerElementState.setText("Boiler off.");
         }
         else{
             TextOutputFrame.append("Boiler off. \n");
             boilerOn = false;
+            BoilerElementState.setText("Boiler on.");
         }
     }//GEN-LAST:event_BoilerElementStateActionPerformed
 
     private void BoilerWaterLevelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BoilerWaterLevelActionPerformed
         if(boilerFull == false){
-            TextOutputFrame.append("Boiler full \n");
+            TextOutputFrame.append("Boiler full. \n");
             boilerFull = true;
+            BoilerWaterLevel.setText("Empty boiler.");
         }
         else{
             TextOutputFrame.append("Boiler empty. \n");
             boilerFull = false;
+            BoilerWaterLevel.setText("Fill boiler.");
         }
     }//GEN-LAST:event_BoilerWaterLevelActionPerformed
 
@@ -350,26 +392,30 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
         if(potFull == false){
             TextOutputFrame.append("Pot full \n");
             potFull = true;
+            PotWaterLevel.setText("Empty pot.");
         }
         else{
             TextOutputFrame.append("Pot empty. \n");
             potFull = false;
+            PotWaterLevel.setText("Fill pot.");
         }
     }//GEN-LAST:event_PotWaterLevelActionPerformed
 
     private void EmptyPotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmptyPotActionPerformed
         if(potFull == false){
-            TextOutputFrame.append("Pot already empty \n");
+            TextOutputFrame.append("Pot already empty. \n");
         }
         else{
             TextOutputFrame.append("Pot empty. \n");
             potFull = false;
+            PotWaterLevel.setText("Fill pot.");
+            
         }
     }//GEN-LAST:event_EmptyPotActionPerformed
 
     private void BrewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrewButtonActionPerformed
         if(powerOn == false){
-            TextOutputFrame.append("Power off please turn on \n");
+            TextOutputFrame.append("Power off please turn on. \n");
         }else if(boilerFull == false){
             TextOutputFrame.append("Boiler Empty please fill. \n");
         }else if(potOnHeater == false){
@@ -389,12 +435,13 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
 
     private void FillBoilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillBoilerActionPerformed
         if(boilerFull == false){
-            TextOutputFrame.append("Boiler full \n");
+            TextOutputFrame.append("Boiler full. \n");
             boilerFull = true;
+            BoilerWaterLevel.setText("Empty boiler.");
+            
         }
         else{
-            TextOutputFrame.append("Boiler empty. \n");
-            boilerFull = false;
+            TextOutputFrame.append("Boiler already full. \n");
         }
     }//GEN-LAST:event_FillBoilerActionPerformed
 
@@ -402,10 +449,12 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
         if(potOnHeater == false){
             TextOutputFrame.append("Pot placed on heater. \n");
             potOnHeater = true;
+            PotOnOff.setText("Remove pot.");
         }
         else{
             TextOutputFrame.append("Pot removed from heater. \n");
             potOnHeater = false;
+            PotOnOff.setText("Place pot.");
         }
     }//GEN-LAST:event_PotOnOffActionPerformed
 
@@ -413,11 +462,14 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
         if(powerOn == false){
             TextOutputFrame.append("Power on. \n");
             powerOn = true;
+            PowerButton.setText("Power off.");
         }
         else{
             TextOutputFrame.append("Power off. \n");
             powerOn = false;
+            PowerButton.setText("Power on.");
         }
+        
     }//GEN-LAST:event_PowerButtonActionPerformed
 
     private void FileMenuItemQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FileMenuItemQuitActionPerformed
