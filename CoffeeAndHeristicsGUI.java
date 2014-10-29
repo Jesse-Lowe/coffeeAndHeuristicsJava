@@ -368,15 +368,23 @@ public class CoffeeAndHeristicsGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_EmptyPotActionPerformed
 
     private void BrewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrewButtonActionPerformed
-        if(boilerOn == false){
-            TextOutputFrame.append("Brewing \n");
-            boilerOn = true;
+        if(powerOn == false){
+            TextOutputFrame.append("Power off please turn on \n");
+        }else if(boilerFull == false){
+            TextOutputFrame.append("Boiler Empty please fill. \n");
+        }else if(potOnHeater == false){
+            TextOutputFrame.append("Pot missing please place on heater. \n");
+        }else if(potFull == true){
+            TextOutputFrame.append("Pot full please empty. \n");
+        }else{
+            TextOutputFrame.append("Brewing. \n");
+            TextOutputFrame.append("Finished Brewing. \n");
+            potFull = true;
+            boilerFull = false;
+            heaterPlateOn = true;
+            valveClosed  = false;
+        }
 
-        }
-        else{
-            TextOutputFrame.append("Already brewing. \n");
-            potFull = false;
-        }
     }//GEN-LAST:event_BrewButtonActionPerformed
 
     private void FillBoilerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FillBoilerActionPerformed
